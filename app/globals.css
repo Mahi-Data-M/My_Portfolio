@@ -24,27 +24,27 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Prevent iOS bounce & improve scroll feel */
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
   overflow-x: hidden;
+  /* Smoother scrolling on mobile */
+  overscroll-behavior-y: none;
 }
 
-/* ─── Custom scrollbar ───────────────────────────────────────────────────── */
-::-webkit-scrollbar {
-  width: 6px;
-}
-::-webkit-scrollbar-track {
-  background: var(--bg-base);
-}
-::-webkit-scrollbar-thumb {
-  background: rgba(56, 189, 248, 0.25);
-  border-radius: 3px;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: rgba(56, 189, 248, 0.45);
+/* ─── Custom scrollbar (desktop only) ───────────────────────────────────── */
+@media (min-width: 768px) {
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--bg-base); }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(56, 189, 248, 0.25);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover { background: rgba(56, 189, 248, 0.45); }
 }
 
 /* ─── Text selection ─────────────────────────────────────────────────────── */
@@ -57,12 +57,7 @@ body {
 @layer components {
   .gradient-text {
     @apply bg-clip-text text-transparent;
-    background-image: linear-gradient(
-      135deg,
-      #38bdf8 0%,
-      #a78bfa 50%,
-      #38bdf8 100%
-    );
+    background-image: linear-gradient(135deg, #38bdf8 0%, #a78bfa 50%, #38bdf8 100%);
     background-size: 200% auto;
     animation: shimmer 4s linear infinite;
   }
@@ -77,7 +72,7 @@ body {
     background-image: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 100%);
   }
 
-  /* Glass card */
+  /* ── Glass card ── */
   .glass {
     background: rgba(15, 22, 41, 0.6);
     backdrop-filter: blur(16px);
@@ -90,22 +85,25 @@ body {
   }
   .glass-hover:hover {
     border-color: rgba(56, 189, 248, 0.25);
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.45), 0 0 0 1px rgba(56, 189, 248, 0.12),
+    box-shadow:
+      0 8px 40px rgba(0, 0, 0, 0.45),
+      0 0 0 1px rgba(56, 189, 248, 0.12),
       0 0 30px rgba(56, 189, 248, 0.06);
     transform: translateY(-2px);
   }
 
-  /* Section label */
+  /* ── Section label ── */
   .section-label {
     @apply text-xs font-semibold tracking-[0.25em] uppercase text-cyan-400;
   }
 
-  /* Section heading */
+  /* ── Section heading — fluid scale ── */
   .section-heading {
-    @apply text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-text-primary leading-tight;
+    @apply font-bold tracking-tight text-text-primary leading-tight;
+    font-size: clamp(1.75rem, 4vw, 3.25rem);
   }
 
-  /* Tech pill badge */
+  /* ── Tech pill badge ── */
   .tech-pill {
     @apply text-xs font-medium px-3 py-1 rounded-full border;
     background: rgba(56, 189, 248, 0.08);
@@ -132,22 +130,19 @@ body {
 
 /* ─── Keyframes ──────────────────────────────────────────────────────────── */
 @keyframes shimmer {
-  0% { background-position: 0% center; }
+  0%   { background-position: 0% center; }
   100% { background-position: 200% center; }
 }
-
 @keyframes float {
   0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
+  50%       { transform: translateY(-10px); }
 }
-
 @keyframes glowPulse {
   0%, 100% { opacity: 0.5; }
-  50% { opacity: 1; }
+  50%       { opacity: 1; }
 }
-
 @keyframes scanline {
-  0% { transform: translateY(-100%); }
+  0%   { transform: translateY(-100%); }
   100% { transform: translateY(100vh); }
 }
 
@@ -155,10 +150,11 @@ body {
 .ambient-orb {
   position: fixed;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(80px);
   pointer-events: none;
   z-index: 0;
   animation: glowPulse 8s ease-in-out infinite;
+  will-change: opacity;
 }
 
 /* ─── Section spacing ────────────────────────────────────────────────────── */
@@ -183,11 +179,49 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.07);
   color: var(--text-primary);
   outline: none;
+  /* Prevent iOS zoom on focus */
+  font-size: max(16px, 0.875rem);
 }
-.input-premium::placeholder {
-  color: var(--text-muted);
-}
+.input-premium::placeholder { color: var(--text-muted); }
 .input-premium:focus {
   border-color: rgba(56, 189, 248, 0.4);
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
+}
+
+/* ─── Hero video responsive position ────────────────────────────────────── */
+.hero-video {
+  object-fit: cover;
+  /* On mobile show the upper-center portion of the video */
+  object-position: center 20%;
+}
+@media (min-width: 640px) {
+  .hero-video { object-position: center 25%; }
+}
+@media (min-width: 1024px) {
+  .hero-video { object-position: center center; }
+}
+
+/* ─── Mobile performance: reduce backdrop-filter cost ───────────────────── */
+@media (max-width: 767px) {
+  .glass,
+  .glass-hover {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+}
+
+/* ─── Touch devices: disable translateY hover so cards don't stick ───────── */
+@media (hover: none) {
+  .glass-hover:hover {
+    transform: none;
+    border-color: rgba(255, 255, 255, 0.07);
+    box-shadow: none;
+  }
+}
+
+/* ─── Reduce motion: respect OS accessibility setting ───────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .gradient-text      { animation: none; }
+  .ambient-orb        { animation: none; }
+  html                { scroll-behavior: auto; }
 }

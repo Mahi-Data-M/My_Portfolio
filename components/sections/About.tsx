@@ -41,10 +41,10 @@ export default function About() {
     target: sectionRef,
     offset: ["start end", "start 0.55"],
   });
-  // Subtle 18px rise — completes quickly as section enters viewport
-  const rawY = useTransform(scrollYProgress, [0, 1], [18, 0]);
-  // Spring smooths out any scroll jank into buttery motion
-  const contentY = useSpring(rawY, { stiffness: 90, damping: 28, mass: 0.6 });
+  // Subtle 12px rise — short travel keeps it smooth on mobile
+  const rawY = useTransform(scrollYProgress, [0, 1], [12, 0]);
+  // Stiffer spring = snappier, less lag on low-powered devices
+  const contentY = useSpring(rawY, { stiffness: 110, damping: 32, mass: 0.5 });
 
   return (
     <section

@@ -53,3 +53,5 @@ pnpm-debug.log*
 # ── Claude Code / AI tooling — never push AI memory or config ─────────────────
 .claude/
 CLAUDE.md
+
+.vercel

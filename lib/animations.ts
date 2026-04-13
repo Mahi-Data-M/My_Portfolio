@@ -1,15 +1,14 @@
 import type { Variants } from "framer-motion";
 
-// Easing curve used throughout
 export const EASE_PREMIUM = [0.21, 0.47, 0.32, 0.98] as const;
 
-// Fade up — primary scroll reveal
+// Fade up — reduced y travel for snappier mobile feel
 export const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
+  hidden: { opacity: 0, y: 24 },
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.7, ease: EASE_PREMIUM },
+    transition: { duration: 0.55, ease: EASE_PREMIUM },
   },
 };
 
@@ -18,48 +17,45 @@ export const fadeIn: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
-    transition: { duration: 0.6, ease: "easeOut" },
+    transition: { duration: 0.5, ease: "easeOut" },
   },
 };
 
 // Fade in from left
 export const fadeInLeft: Variants = {
-  hidden: { opacity: 0, x: -40 },
+  hidden: { opacity: 0, x: -24 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: EASE_PREMIUM },
+    transition: { duration: 0.55, ease: EASE_PREMIUM },
   },
 };
 
 // Fade in from right
 export const fadeInRight: Variants = {
-  hidden: { opacity: 0, x: 40 },
+  hidden: { opacity: 0, x: 24 },
   visible: {
     opacity: 1,
     x: 0,
-    transition: { duration: 0.7, ease: EASE_PREMIUM },
+    transition: { duration: 0.55, ease: EASE_PREMIUM },
   },
 };
 
 // Scale in
 export const scaleIn: Variants = {
-  hidden: { opacity: 0, scale: 0.9 },
+  hidden: { opacity: 0, scale: 0.94 },
   visible: {
     opacity: 1,
     scale: 1,
-    transition: { duration: 0.5, ease: EASE_PREMIUM },
+    transition: { duration: 0.45, ease: EASE_PREMIUM },
   },
 };
 
-// Stagger container — wraps children with stagger
+// Stagger container
 export const staggerContainer: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.08,
-      delayChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.07, delayChildren: 0.08 },
   },
 };
 
@@ -67,10 +63,7 @@ export const staggerContainer: Variants = {
 export const staggerFast: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.05,
-    },
+    transition: { staggerChildren: 0.04, delayChildren: 0.04 },
   },
 };
 
@@ -78,15 +71,12 @@ export const staggerFast: Variants = {
 export const staggerSlow: Variants = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2,
-    },
+    transition: { staggerChildren: 0.12, delayChildren: 0.15 },
   },
 };
 
-// Common viewport config
+// Viewport — trigger earlier on mobile with smaller margin
 export const viewport = {
   once: true,
-  margin: "-80px",
+  margin: "-60px",
 } as const;

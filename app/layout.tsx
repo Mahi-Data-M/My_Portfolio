@@ -15,46 +15,48 @@ export const metadata: Metadata = {
   description:
     "Portfolio of Muskaan Mahindrakar. 6+ years building scalable data pipelines, intelligent analytics, and AI-powered solutions across AWS, Azure, GCP, Databricks, and more.",
   keywords: [
-    "Data Engineer",
-    "Data Scientist",
-    "AI Engineer",
-    "ML Engineer",
-    "Python",
-    "PySpark",
-    "Databricks",
-    "AWS",
-    "Azure",
-    "GCP",
-    "LangChain",
-    "GenAI",
-    "MLOps",
+    "Data Engineer", "Data Scientist", "AI Engineer", "ML Engineer",
+    "Python", "PySpark", "Databricks", "AWS", "Azure", "GCP",
+    "LangChain", "GenAI", "MLOps",
   ],
   authors: [{ name: "Muskaan Mahindrakar" }],
-  // TODO: Update og:image with your actual profile image path
   openGraph: {
     type: "website",
     title: "Muskaan Mahindrakar — Data Engineer · AI/ML Engineer",
     description:
       "Building scalable data systems, intelligent analytics, and AI-powered solutions.",
-    // url: "https://your-domain.com", // TODO: Add your deployed URL
   },
 };
 
 export const viewport: Viewport = {
   themeColor: "#050911",
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,   // allow pinch-zoom for accessibility
+  userScalable: true,
 };
 
-/* ── Background ambient layer ───────────────────────────────────────────── */
+/* ── Ambient background — desktop-only orbs, single lightweight layer on mobile ── */
 function AmbientBackground() {
   return (
     <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden" aria-hidden>
-      {/* Top-center cyan orb */}
+      {/* Subtle grid overlay — always visible, very low opacity */}
       <div
-        className="ambient-orb"
+        className="absolute inset-0"
         style={{
-          width: 800,
-          height: 800,
-          top: -200,
+          backgroundImage:
+            "linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.018) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
+      {/* Top-center cyan orb — scaled down on mobile */}
+      <div
+        className="ambient-orb hidden sm:block"
+        style={{
+          width: "clamp(300px, 55vw, 800px)",
+          height: "clamp(300px, 55vw, 800px)",
+          top: "-15%",
           left: "50%",
           transform: "translateX(-50%)",
           background: "radial-gradient(circle, rgba(56,189,248,0.07) 0%, transparent 70%)",
@@ -63,35 +65,39 @@ function AmbientBackground() {
       />
       {/* Bottom-left violet orb */}
       <div
-        className="ambient-orb"
+        className="ambient-orb hidden sm:block"
         style={{
-          width: 600,
-          height: 600,
+          width: "clamp(200px, 40vw, 600px)",
+          height: "clamp(200px, 40vw, 600px)",
           bottom: "20%",
-          left: -100,
+          left: "-5%",
           background: "radial-gradient(circle, rgba(167,139,250,0.06) 0%, transparent 70%)",
           animationDelay: "4s",
         }}
       />
       {/* Bottom-right cyan orb */}
       <div
-        className="ambient-orb"
+        className="ambient-orb hidden md:block"
         style={{
-          width: 500,
-          height: 500,
+          width: "clamp(200px, 35vw, 500px)",
+          height: "clamp(200px, 35vw, 500px)",
           bottom: "10%",
-          right: -80,
+          right: "-5%",
           background: "radial-gradient(circle, rgba(56,189,248,0.05) 0%, transparent 70%)",
           animationDelay: "2s",
         }}
       />
-      {/* Subtle grid overlay */}
+      {/* Mobile-only: single minimal orb */}
       <div
-        className="absolute inset-0"
+        className="ambient-orb sm:hidden"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px)",
-          backgroundSize: "60px 60px",
+          width: 280,
+          height: 280,
+          top: "-10%",
+          left: "50%",
+          transform: "translateX(-50%)",
+          background: "radial-gradient(circle, rgba(56,189,248,0.06) 0%, transparent 70%)",
+          filter: "blur(60px)",
         }}
       />
     </div>
