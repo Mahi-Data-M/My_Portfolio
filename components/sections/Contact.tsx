@@ -289,7 +289,7 @@ export default function Contact() {
                       className="input-premium"
                     >
                       <option value="" disabled>
-                        What's this about?
+                        What&apos;s this about?
                       </option>
                       <option value="job-opportunity">Job Opportunity</option>
                       <option value="contract">Contract / Freelance</option>
