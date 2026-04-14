@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { fadeInUp, staggerContainer, viewport } from "@/lib/animations";
 import { ExternalLink, Github, ArrowRight, Zap, Brain, BarChart3 } from "lucide-react";
@@ -14,6 +15,7 @@ const PROJECTS = [
     icon: Zap,
     accentColor: "cyan",
     gradient: "from-cyan-500/15 via-sky-500/8 to-transparent",
+    image: "/images/project-ai-web-analytics.jpg",
     description:
       "End-to-end AI-powered platform delivering intelligent web presence and real-time analytics dashboards for local SMBs. Combines automated content generation, customer behavior analytics, and actionable business insights — all in one integrated solution.",
     longDescription:
@@ -36,6 +38,7 @@ const PROJECTS = [
     icon: Brain,
     accentColor: "violet",
     gradient: "from-violet-500/15 via-purple-500/8 to-transparent",
+    image: "/images/project-ai-business-agent.jpg",
     description:
       "Autonomous multi-agent system that ingests structured and unstructured business data, reasons over it using RAG, and surfaces actionable insights through a conversational interface — no SQL knowledge required.",
     longDescription:
@@ -58,6 +61,7 @@ const PROJECTS = [
     icon: BarChart3,
     accentColor: "sky",
     gradient: "from-sky-500/15 via-cyan-500/8 to-transparent",
+    image: "/images/project-realtime-mlops.jpg",
     description:
       "Enterprise-grade streaming data pipeline processing 500K+ customer events per minute, with integrated ML scoring, automated model retraining, and a real-time analytics dashboard for customer behavior insights.",
     longDescription:
@@ -283,41 +287,62 @@ export default function Projects() {
                 }}
                 className={`group relative glass rounded-2xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col ${accent.border} hover:shadow-[0_12px_48px_rgba(0,0,0,0.5)]`}
               >
-                {/* Card gradient header */}
-                <div
-                  className={`relative h-36 sm:h-40 bg-gradient-to-br ${project.gradient} flex items-center justify-center overflow-hidden`}
-                >
-                  {/* Decorative grid in card header */}
+                {/* Card image header */}
+                <div className="relative aspect-[16/9] overflow-hidden">
+                  {/* Project image with hover scale */}
+                  <motion.div
+                    className="absolute inset-0"
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.5, ease: [0.21, 0.47, 0.32, 0.98] }}
+                  >
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                      className="object-cover brightness-90 group-hover:brightness-100 transition-[filter] duration-500"
+                      priority={false}
+                    />
+                  </motion.div>
+
+                  {/* Dark gradient overlay — bottom fade for badge legibility */}
                   <div
-                    className="absolute inset-0 opacity-20"
+                    className="absolute inset-0 pointer-events-none"
                     style={{
-                      backgroundImage:
-                        "linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px)",
-                      backgroundSize: "20px 20px",
+                      background:
+                        "linear-gradient(to bottom, rgba(5,9,17,0.15) 0%, transparent 40%, rgba(5,9,17,0.55) 100%)",
                     }}
                   />
-                  {/* Icon */}
+
+                  {/* Accent tint overlay matching card color */}
                   <div
-                    className={`relative w-14 h-14 rounded-2xl border flex items-center justify-center ${accent.badge} group-hover:scale-110 transition-transform duration-300`}
-                  >
-                    <Icon size={24} />
-                  </div>
+                    className={`absolute inset-0 pointer-events-none bg-gradient-to-br ${project.gradient} opacity-40`}
+                  />
 
                   {/* Status badge */}
-                  <div className="absolute top-4 right-4">
-                    <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-emerald-400/10 border border-emerald-400/20 rounded-full px-2.5 py-1">
+                  <div className="absolute top-3 right-3">
+                    <span className="flex items-center gap-1.5 text-xs font-medium text-emerald-400 bg-black/50 border border-emerald-400/30 rounded-full px-2.5 py-1 backdrop-blur-sm">
                       <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
                       {project.status}
                     </span>
                   </div>
 
                   {/* Category */}
-                  <div className="absolute top-4 left-4">
+                  <div className="absolute top-3 left-3">
                     <span
-                      className={`text-xs font-medium px-2.5 py-1 rounded-full border ${accent.badge}`}
+                      className={`text-xs font-medium px-2.5 py-1 rounded-full border backdrop-blur-sm ${accent.badge}`}
                     >
                       {project.category}
                     </span>
+                  </div>
+
+                  {/* Icon — bottom-left of image */}
+                  <div className="absolute bottom-3 left-4">
+                    <div
+                      className={`w-9 h-9 rounded-xl border flex items-center justify-center backdrop-blur-sm group-hover:scale-110 transition-transform duration-300 ${accent.badge}`}
+                    >
+                      <Icon size={16} />
+                    </div>
                   </div>
                 </div>
 
