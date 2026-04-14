@@ -191,8 +191,11 @@ body {
 /* ─── Hero video responsive position ────────────────────────────────────── */
 .hero-video {
   object-fit: cover;
-  /* On mobile show the upper-center portion of the video */
-  object-position: center 20%;
+  /* Mobile portrait: shift slightly left so subject stays centered on narrow screens */
+  object-position: 35% 20%;
+}
+@media (min-width: 480px) {
+  .hero-video { object-position: center 20%; }
 }
 @media (min-width: 640px) {
   .hero-video { object-position: center 25%; }
