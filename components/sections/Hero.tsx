@@ -5,7 +5,7 @@ import { motion, useScroll, useTransform, useSpring } from "framer-motion";
 import { ArrowDown, Sparkles, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-const HERO_VIDEO_PATH = "/videos/hero.mp4";
+const HERO_VIDEO_PATH = "/videos/hero-cinematic.mp4";
 
 export default function Hero() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -44,7 +44,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="sticky top-0 z-0 min-h-[88svh] sm:min-h-[92svh] lg:min-h-[100svh] overflow-hidden"
+      className="sticky top-0 z-0 h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden"
     >
       {/* ── Parallax video wrapper ─────────────────────────────────────── */}
       <motion.div
@@ -58,16 +58,16 @@ export default function Hero() {
       >
         <video
           src={HERO_VIDEO_PATH}
-          poster="/images/hero-poster.jpg"
+          poster="/images/hero-poster-cinematic.jpg"
           autoPlay
           muted
           loop
           playsInline
           // metadata on mobile saves bandwidth; auto on desktop for smooth loop
           preload={isDesktop ? "auto" : "metadata"}
-          className="hero-video absolute inset-0 w-full h-full"
+          className="hero-video absolute inset-0 w-full h-full object-cover"
           style={{
-            background: "linear-gradient(135deg, #050911 0%, #0c1a3a 50%, #050911 100%)",
+            background: "linear-gradient(135deg, #020408 0%, #070d1a 50%, #020408 100%)",
             transform: "translateZ(0)",
           }}
         />
@@ -76,7 +76,7 @@ export default function Hero() {
       {/* ── Subtle dark overlay ──────────────────────────────────────────── */}
       <div
         className="absolute inset-0 z-[1] pointer-events-none"
-        style={{ background: "rgba(5,9,17,0.22)" }}
+        style={{ background: "rgba(2,4,8,0.38)" }}
       />
 
       {/* ── Bottom fade — merges into About section ──────────────────────── */}
