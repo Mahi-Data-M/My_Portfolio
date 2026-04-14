@@ -87,7 +87,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding relative overflow-x-hidden">
+    <section id="contact" className="section-padding relative overflow-hidden">
       {/* Glow accent */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -97,39 +97,14 @@ export default function Contact() {
         }}
       />
 
-      {/* Character image — bottom-right, only on wide screens to prevent overlap */}
-      <div
-        className="pointer-events-none absolute bottom-0 right-0 hidden xl:block"
-        style={{ width: "clamp(380px, 28vw, 520px)", height: "clamp(500px, 37vw, 680px)", zIndex: 1 }}
-        aria-hidden
-      >
-        {/* Bottom fade so she merges with the section floor */}
-        <div
-          className="absolute inset-0 z-10"
-          style={{
-            background:
-              "linear-gradient(to top, #050911 0%, transparent 30%), linear-gradient(to left, transparent 48%, #050911 100%)",
-          }}
-        />
-        <Image
-          src="/images/profile-headphones.png"
-          alt=""
-          fill
-          className="object-contain object-bottom"
-          style={{ opacity: 0.75 }}
-          sizes="520px"
-        />
-      </div>
-
-      {/* Content shifted left — max-w-5xl to leave room for character on xl+ */}
-      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
-        {/* Header */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6">
+        {/* Header — always centered */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mb-8 sm:mb-16 text-center xl:text-left"
+          className="mb-8 sm:mb-16 text-center"
         >
           <motion.p variants={fadeInUp} className="section-label mb-4">
             Contact
@@ -139,13 +114,21 @@ export default function Contact() {
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-4 mx-auto max-w-xl xl:mx-0 text-text-secondary"
+            className="mt-4 mx-auto max-w-xl text-text-secondary"
           >
             Open to Data Engineering, Data Science, and AI/ML opportunities.
             Whether it&apos;s a full-time role, contract, or collaboration — I&apos;d love to connect.
           </motion.p>
         </motion.div>
 
+        {/*
+         * Outer flex row: form content (flex-1) + character column (xl+ only).
+         * Character is IN document flow — no absolute positioning, no overflow.
+         */}
+        <div className="flex flex-col xl:flex-row xl:items-end xl:gap-8">
+
+          {/* ── Form + socials ── */}
+          <div className="flex-1 min-w-0">
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-10">
           {/* Left — Social info */}
           <motion.div
@@ -342,7 +325,34 @@ export default function Contact() {
               )}
             </div>
           </motion.div>
-        </div>
+          </div>
+          </div>{/* end form side */}
+
+          {/* ── Character column (xl+ only, in document flow) ── */}
+          <div
+            className="hidden xl:block flex-shrink-0 self-end relative"
+            style={{ width: "clamp(220px, 18vw, 320px)", height: "clamp(320px, 28vw, 480px)" }}
+            aria-hidden
+          >
+            {/* Bottom + left fade — merges into dark background */}
+            <div
+              className="absolute inset-0 z-10 pointer-events-none"
+              style={{
+                background:
+                  "linear-gradient(to top, #050911 0%, transparent 30%), linear-gradient(to left, transparent 40%, #050911 100%)",
+              }}
+            />
+            <Image
+              src="/images/profile-headphones.png"
+              alt=""
+              fill
+              className="object-contain object-bottom"
+              style={{ opacity: 0.78 }}
+              sizes="(min-width: 1280px) 320px, 0px"
+            />
+          </div>
+
+        </div>{/* end outer flex row */}
       </div>
     </section>
   );

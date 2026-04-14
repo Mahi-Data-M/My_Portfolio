@@ -24,18 +24,22 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
-  /* Prevent iOS bounce & improve scroll feel */
-  -webkit-overflow-scrolling: touch;
-  /* Clip any accidental horizontal overflow at root */
-  overflow-x: hidden;
+  /*
+   * NO overflow-x here. Setting any overflow on <html> transfers the scroll
+   * container responsibility to <body>. If <body> also has overflow set,
+   * wheel and touch events stop reaching either container → scroll locks.
+   * Horizontal overflow is controlled per-section (e.g. Contact) instead.
+   */
 }
 
 body {
   background-color: var(--bg-base);
   color: var(--text-primary);
-  overflow-x: hidden;
-  /* Smoother scrolling on mobile */
-  overscroll-behavior-y: none;
+  /*
+   * NO overflow-x on body either — it breaks position:sticky on iOS Safari
+   * and can prevent wheel/trackpad scroll in Chrome. Sections that need
+   * horizontal clipping use overflow-hidden on themselves.
+   */
 }
 
 /* ─── Custom scrollbar (desktop only) ───────────────────────────────────── */
@@ -190,10 +194,13 @@ body {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
 }
 
-/* ─── Hero video responsive position ────────────────────────────────────── */
+/* ─── Hero video — contain on mobile (full frame, no crop), cover on tablet+ ── */
 .hero-video {
-  object-fit: cover;
+  object-fit: contain;       /* mobile: full 16:9 frame visible, no left/right crop */
   object-position: center center;
+}
+@media (min-width: 768px) {
+  .hero-video { object-fit: cover; } /* tablet+: immersive full-bleed fill */
 }
 
 /* ─── Mobile performance: reduce backdrop-filter cost ───────────────────── */

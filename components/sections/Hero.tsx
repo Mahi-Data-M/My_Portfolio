@@ -25,15 +25,16 @@ export default function Hero() {
     offset: ["start start", "end start"],
   });
 
-  // Parallax only on desktop — mobile gets y:0 for smooth scrolling
+  // Parallax only on desktop — completely zero on mobile to prevent scroll jank
   const rawY = useTransform(
     scrollYProgress,
     [0, 1],
     isDesktop ? ["0%", "12%"] : ["0%", "0%"]
   );
+  // Spring only wired on desktop; mobile gets a static 0 so no transform overhead
   const parallaxY = useSpring(rawY, { stiffness: 120, damping: 30, mass: 0.4 });
 
-  // Scale: no zoom on mobile (no parallax), small buffer on desktop
+  // 1.1 desktop scale to cover parallax travel; exactly 1.0 on mobile (no movement)
   const videoScale = isDesktop ? 1.1 : 1.0;
 
   const scrollToNext = () => {
@@ -44,7 +45,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="sticky top-0 z-0 h-[70vh] md:h-[80vh] lg:h-screen overflow-hidden"
+      className="sticky top-0 z-0 w-full min-h-[70vh] md:min-h-[80vh] lg:min-h-screen overflow-hidden"
     >
       {/* ── Parallax video wrapper ─────────────────────────────────────── */}
       <motion.div
@@ -65,7 +66,7 @@ export default function Hero() {
           playsInline
           // metadata on mobile saves bandwidth; auto on desktop for smooth loop
           preload={isDesktop ? "auto" : "metadata"}
-          className="hero-video absolute inset-0 w-full h-full object-cover"
+          className="hero-video absolute inset-0 w-full h-full"
           style={{
             background: "linear-gradient(135deg, #020408 0%, #070d1a 50%, #020408 100%)",
             transform: "translateZ(0)",
