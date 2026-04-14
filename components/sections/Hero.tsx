@@ -45,7 +45,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="sticky top-0 z-0 w-full min-h-[70vh] md:min-h-[80vh] lg:min-h-screen overflow-hidden"
+      className="sticky top-0 z-0 w-full min-h-[70vh] md:min-h-[80vh] lg:min-h-screen overflow-hidden bg-[#020408]"
     >
       {/* ── Parallax video wrapper ─────────────────────────────────────── */}
       <motion.div

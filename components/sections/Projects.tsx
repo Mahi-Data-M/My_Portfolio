@@ -25,9 +25,8 @@ const PROJECTS = [
       "Python", "Next.js", "TypeScript", "OpenAI API", "LangChain",
       "PostgreSQL", "FastAPI", "Docker", "AWS", "Tailwind CSS",
     ],
-    // TODO: Add your actual GitHub and live demo URLs
-    githubUrl: "#", // Replace with: https://github.com/yourusername/repo
-    liveUrl: "#",   // Replace with your deployed URL
+    githubUrl: "https://github.com/Mahi-Data-M",
+    liveUrl: "#",
     featured: true,
   },
   {
@@ -48,8 +47,7 @@ const PROJECTS = [
       "Python", "LangChain", "OpenAI GPT-4", "RAG", "Pinecone",
       "Snowflake", "FastAPI", "Streamlit", "Docker", "LangSmith",
     ],
-    // TODO: Add your actual GitHub and live demo URLs
-    githubUrl: "#",
+    githubUrl: "https://github.com/Mahi-Data-M/ai-business-insights-agent/blob/main/README.md",
     liveUrl: "#",
     featured: true,
   },
@@ -71,8 +69,7 @@ const PROJECTS = [
       "Apache Kafka", "PySpark", "Spark Streaming", "MLflow", "Databricks",
       "AWS S3", "Redshift", "Docker", "Airflow", "Grafana", "Python",
     ],
-    // TODO: Add your actual GitHub repo URL (this is your existing project)
-    githubUrl: "https://github.com/Mahi-Data-M",
+    githubUrl: "https://github.com/Mahi-Data-M/Real-Time-Customer-Analytics-Pipeline-MLOps/blob/main/README.md",
     liveUrl: "#",
     featured: false,
   },
@@ -287,6 +284,14 @@ export default function Projects() {
                 }}
                 className={`group relative glass rounded-2xl overflow-hidden border border-border-subtle transition-all duration-300 flex flex-col ${accent.border} hover:shadow-[0_12px_48px_rgba(0,0,0,0.5)]`}
               >
+                {/* Stretched link — makes entire card clickable; sits at z-0 under content */}
+                <a
+                  href={project.githubUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="absolute inset-0 z-0"
+                  aria-label={`View ${project.title} on GitHub`}
+                />
                 {/* Card image header */}
                 <div className="relative aspect-[16/9] overflow-hidden">
                   {/* Project image with hover scale */}
@@ -346,8 +351,8 @@ export default function Projects() {
                   </div>
                 </div>
 
-                {/* Card body */}
-                <div className="flex flex-col flex-1 p-6">
+                {/* Card body — relative z-[1] so it sits above the stretched link */}
+                <div className="relative z-[1] flex flex-col flex-1 p-6">
                   <h3 className="text-lg font-bold text-text-primary leading-tight mb-3 group-hover:text-white transition-colors">
                     {project.title}
                   </h3>
@@ -386,8 +391,8 @@ export default function Projects() {
                     )}
                   </div>
 
-                  {/* Links */}
-                  <div className="flex items-center gap-4 mt-auto">
+                  {/* Links — z-10 ensures they're above the card-level stretched link */}
+                  <div className="relative z-10 flex items-center gap-4 mt-auto">
                     {project.githubUrl !== "#" && (
                       <a
                         href={project.githubUrl}

@@ -194,13 +194,17 @@ body {
   box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.08);
 }
 
-/* ─── Hero video — contain on mobile (full frame, no crop), cover on tablet+ ── */
+/* ─── Hero video — object-cover on all sizes, centered crop ─────────────── */
+/*
+ * object-contain on mobile causes black letterbox bars because the container
+ * (min-h 70vh) is always taller than 16:9 at portrait widths, and browsers
+ * render the uncovered area as black regardless of the video background style.
+ * object-cover fills the container on every device — crop is minimal and
+ * visually centred so the focal area of the cinematic video stays on screen.
+ */
 .hero-video {
-  object-fit: contain;       /* mobile: full 16:9 frame visible, no left/right crop */
+  object-fit: cover;
   object-position: center center;
-}
-@media (min-width: 768px) {
-  .hero-video { object-fit: cover; } /* tablet+: immersive full-bleed fill */
 }
 
 /* ─── Mobile performance: reduce backdrop-filter cost ───────────────────── */
