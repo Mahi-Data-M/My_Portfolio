@@ -70,7 +70,7 @@ export default function About() {
 
       <motion.div
         style={{ y: contentY }}
-        className="mx-auto max-w-7xl px-6"
+        className="mx-auto max-w-7xl px-4 sm:px-6"
       >
         {/* Section header */}
         <motion.div

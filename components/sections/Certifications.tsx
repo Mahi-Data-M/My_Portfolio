@@ -93,7 +93,7 @@ const COLOR_MAP: Record<string, string> = {
 export default function Certifications() {
   return (
     <section id="certifications" className="section-padding relative">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <motion.div
           variants={staggerContainer}

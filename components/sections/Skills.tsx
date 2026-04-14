@@ -109,7 +109,7 @@ export default function Skills() {
 
   return (
     <section id="skills" className="section-padding relative">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <motion.div
           variants={staggerContainer}
@@ -147,7 +147,7 @@ export default function Skills() {
               <button
                 key={cat.id}
                 onClick={() => setActiveTab(cat.id)}
-                className={`flex items-center gap-2 px-3 sm:px-4 py-2 rounded-lg text-xs sm:text-sm font-medium border transition-all duration-200 ${
+                className={`flex items-center gap-1.5 sm:gap-2 px-2.5 sm:px-4 py-1.5 sm:py-2 rounded-lg text-[11px] sm:text-sm font-medium border transition-all duration-200 ${
                   activeTab === cat.id
                     ? `${colors.tab} border-current bg-current/8`
                     : "border-border-subtle text-text-secondary hover:text-text-primary hover:border-border-accent hover:bg-white/5"

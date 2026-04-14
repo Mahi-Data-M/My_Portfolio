@@ -33,8 +33,8 @@ export default function Hero() {
   );
   const parallaxY = useSpring(rawY, { stiffness: 120, damping: 30, mass: 0.4 });
 
-  // Scale: slightly less crop on mobile
-  const videoScale = isDesktop ? 1.1 : 1.05;
+  // Scale: no zoom on mobile (no parallax), small buffer on desktop
+  const videoScale = isDesktop ? 1.1 : 1.0;
 
   const scrollToNext = () => {
     document.querySelector("#about")?.scrollIntoView({ behavior: "smooth" });
@@ -44,7 +44,7 @@ export default function Hero() {
     <section
       ref={sectionRef}
       id="hero"
-      className="sticky top-0 z-0 min-h-[100svh] overflow-hidden"
+      className="sticky top-0 z-0 min-h-[88svh] sm:min-h-[92svh] lg:min-h-[100svh] overflow-hidden"
     >
       {/* ── Parallax video wrapper ─────────────────────────────────────── */}
       <motion.div
@@ -90,7 +90,7 @@ export default function Hero() {
       />
 
       {/* ── Bottom-left content ──────────────────────────────────────────── */}
-      <div className="absolute bottom-0 left-0 z-10 w-full px-5 sm:px-8 lg:px-12 pb-8 sm:pb-10 lg:pb-14">
+      <div className="absolute bottom-0 left-0 z-10 w-full px-4 sm:px-8 lg:px-12 pb-6 sm:pb-10 lg:pb-14">
         <div className="flex flex-col items-start gap-3 sm:gap-4 lg:gap-5 max-w-lg sm:max-w-xl lg:max-w-none">
 
           {/* Available badge */}
@@ -114,7 +114,7 @@ export default function Hero() {
             initial={{ opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
-            className="flex flex-wrap items-end gap-x-5 gap-y-2 sm:gap-x-8 xl:gap-x-10"
+            className="flex flex-wrap items-end gap-x-4 sm:gap-x-8 xl:gap-x-10 gap-y-2"
           >
             {[
               { value: "6+",  label: "Years Exp."      },

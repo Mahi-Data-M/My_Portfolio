@@ -87,7 +87,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="section-padding relative">
+    <section id="contact" className="section-padding relative overflow-x-hidden">
       {/* Glow accent */}
       <div
         className="pointer-events-none absolute inset-x-0 top-0 h-px"
@@ -97,10 +97,10 @@ export default function Contact() {
         }}
       />
 
-      {/* Character image — bottom-right, blends into dark background */}
+      {/* Character image — bottom-right, only on wide screens to prevent overlap */}
       <div
-        className="pointer-events-none absolute bottom-0 right-0 hidden lg:block"
-        style={{ width: "520px", height: "680px", zIndex: 1, marginRight: "-24px" }}
+        className="pointer-events-none absolute bottom-0 right-0 hidden xl:block"
+        style={{ width: "clamp(380px, 28vw, 520px)", height: "clamp(500px, 37vw, 680px)", zIndex: 1 }}
         aria-hidden
       >
         {/* Bottom fade so she merges with the section floor */}
@@ -121,15 +121,15 @@ export default function Contact() {
         />
       </div>
 
-      {/* Content shifted left — max-w-5xl instead of max-w-7xl */}
-      <div className="relative z-10 mx-auto max-w-5xl px-6">
+      {/* Content shifted left — max-w-5xl to leave room for character on xl+ */}
+      <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6">
         {/* Header */}
         <motion.div
           variants={staggerContainer}
           initial="hidden"
           whileInView="visible"
           viewport={viewport}
-          className="mb-10 sm:mb-16 text-center lg:text-left"
+          className="mb-8 sm:mb-16 text-center xl:text-left"
         >
           <motion.p variants={fadeInUp} className="section-label mb-4">
             Contact
@@ -139,7 +139,7 @@ export default function Contact() {
           </motion.h2>
           <motion.p
             variants={fadeInUp}
-            className="mt-4 mx-auto max-w-xl lg:mx-0 text-text-secondary"
+            className="mt-4 mx-auto max-w-xl xl:mx-0 text-text-secondary"
           >
             Open to Data Engineering, Data Science, and AI/ML opportunities.
             Whether it&apos;s a full-time role, contract, or collaboration — I&apos;d love to connect.
@@ -221,7 +221,7 @@ export default function Contact() {
             transition={{ duration: 0.7, ease: [0.21, 0.47, 0.32, 0.98] }}
             className="lg:col-span-3"
           >
-            <div className="glass rounded-2xl p-6 sm:p-8">
+            <div className="glass rounded-2xl p-5 sm:p-8">
               {status === "success" ? (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}

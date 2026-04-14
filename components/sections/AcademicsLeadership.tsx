@@ -96,7 +96,7 @@ const LEAD_COLOR: Record<string, string> = {
 export default function AcademicsLeadership() {
   return (
     <section id="education" className="section-padding relative">
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
 
         {/* ── Section header ──────────────────────────────────────── */}
         <motion.div

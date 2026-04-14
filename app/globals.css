@@ -26,6 +26,8 @@ html {
   text-rendering: optimizeLegibility;
   /* Prevent iOS bounce & improve scroll feel */
   -webkit-overflow-scrolling: touch;
+  /* Clip any accidental horizontal overflow at root */
+  overflow-x: hidden;
 }
 
 body {

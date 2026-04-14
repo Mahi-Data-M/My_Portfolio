@@ -107,7 +107,7 @@ export default function Experience() {
 
   return (
     <section id="experience" className="section-padding relative">
-      <div className="mx-auto max-w-5xl px-6">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
         {/* Header */}
         <motion.div
           variants={staggerContainer}
@@ -168,7 +168,7 @@ export default function Experience() {
                   >
                     {/* Card header — always visible */}
                     <button
-                      className="w-full text-left p-6 sm:p-8"
+                      className="w-full text-left p-4 sm:p-6 lg:p-8"
                       onClick={() =>
                         setExpandedId(isExpanded ? "" : exp.id)
                       }
@@ -183,7 +183,7 @@ export default function Experience() {
                           </div>
 
                           <div>
-                            <h3 className="text-lg font-bold text-text-primary leading-tight">
+                            <h3 className="text-base sm:text-lg font-bold text-text-primary leading-tight">
                               {exp.role}
                             </h3>
                             <p
@@ -236,7 +236,7 @@ export default function Experience() {
                           transition={{ duration: 0.35, ease: [0.21, 0.47, 0.32, 0.98] }}
                           className="overflow-hidden"
                         >
-                          <div className="px-6 pb-8 sm:px-8 border-t border-border-subtle pt-6">
+                          <div className="px-4 pb-6 sm:px-8 sm:pb-8 border-t border-border-subtle pt-5 sm:pt-6">
                             {/* Highlights */}
                             <h4 className="text-xs font-semibold text-text-muted uppercase tracking-widest mb-4">
                               Key Contributions

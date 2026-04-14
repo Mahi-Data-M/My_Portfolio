@@ -244,7 +244,7 @@ export default function Projects() {
         ))}
       </div>
 
-      <div className="mx-auto max-w-7xl px-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         {/* Header */}
         <motion.div
           variants={staggerContainer}
